@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض الأعمال - مبرمجة متخصصة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0a2540;
+            --secondary: #0066cc;
+            --accent: #0071e3;
+            --light: #f5f7fa;
+            --dark: #1d1d1f;
+            --gray: #86868b;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a2540 0%, #1a365d 100%);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 103, 204, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(0, 113, 227, 0.15) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* التصميم ثلاثي الأبعاد */
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.6;
+            z-index: -1;
+        }
+
+        .floating-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent);
+            top: 10%;
+            left: 5%;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .floating-2 {
+            width: 300px;
+            height: 300px;
+            background: #9c27b0;
+            bottom: 15%;
+            right: 10%;
+            animation: float 12s infinite ease-in-out reverse;
+        }
+
+        .floating-3 {
+            width: 250px;
+            height: 250px;
+            background: #00bcd4;
+            top: 40%;
+            right: 20%;
+            animation: float 18s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-20px, 20px); }
+            50% { transform: translate(10px, -15px); }
+            75% { transform: translate(15px, 10px); }
+        }
+
+        /* التصميم العام */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        header {
+            padding: 30px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 37, 64, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* تصميم الشعار الزجاجي المضيء */
+        .logo-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 0 30px rgba(0, 113, 227, 0.5),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+            animation: pulse 2s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-img::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 60%);
+            transform: rotate(30deg);
+        }
+
+        .logo-img img {
+            width: 70%;
+            height: 70%;
+            object-fit: contain;
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 113, 227, 0.7), inset 0 0 20px rgba(255, 255, 255, 0.1); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 113, 227, 0), inset 0 0 20px rgba(255, 255, 255, 0.1); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 113, 227, 0), inset 0 0 20px rgba(255, 255, 255, 0.1); }
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 18px;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* القسم الرئيسي */
+        .hero {
+            padding: 120px 0 80px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            background: linear-gradient(to right, #fff, #a2d5ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .highlight {
+            background: rgba(0, 113, 227, 0.2);
+            padding: 2px 8px;
+            border-radius: 6px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, var(--accent), #0077ff);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 113, 227, 0.4);
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 113, 227, 0.6);
+        }
+
+        /* قسم المهارات */
+        .skills {
+            padding: 120px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 70px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .languages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .language-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .language-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border-color: rgba(0, 113, 227, 0.3);
+        }
+
+        .language-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .language-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* قسم المشاريع */
+        .projects {
+            padding: 120px 0;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: perspective(1000px) rotateY(0deg);
+            transform-style: preserve-3d;
+        }
+
+        .project-card:hover {
+            transform: perspective(1000px) rotateY(5deg);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            border-color: rgba(0, 113, 227, 0.4);
+        }
+
+        .project-image {
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 37, 64, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .project-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            gap: 10px;
+            transition: var(--transition);
+        }
+
+        .project-link:hover {
+            gap: 15px;
+            color: white;
+        }
+
+        /* عرض صور المشاريع */
+        .project-screenshot {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-screenshot {
+            transform: scale(1.05);
+        }
+
+        .project-name-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* قسم المستقبل */
+        .future {
+            padding: 120px 0;
+            text-align: center;
+        }
+
+        .future-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            padding: 60px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .future-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 113, 227, 0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .future h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--accent);
+        }
+
+        .future p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+        }
+
+        /* الفوتر */
+        footer {
+            padding: 80px 0 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-logo {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .footer-logo .logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 400px;
+            line-height: 1.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-size: 1.2rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* التجاوب */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .languages-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- العناصر ثلاثية الأبعاد العائمة -->
+    <div class="floating-element floating-1"></div>
+    <div class="floating-element floating-2"></div>
+    <div class="floating-element floating-3"></div>
+
+    <!-- الهيدر -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-img">
+                    <img src="https://i.postimg.cc/tRdTSSQd/HEIF-Image.jpg" alt="Logo">
+                </div>
+                <div class="logo-text">معرض الأعمال</div>
+            </div>
+            <nav class="nav-links">
+                <a href="#about">عنّي</a>
+                <a href="#skills">مهاراتي</a>
+                <a href="#projects">أعمالي</a>
+                <a href="#future">المستقبل</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- القسم الرئيسي -->
+    <section class="hero" id="about">
+        <div class="container">
+            <div class="hero-content">
+                <h1>مبرمجة متخصصة بفهم عميق للبرمجة وتقنيات الويب</h1>
+                <p>
+                    أنا مبرمجة ومطورة مواقع وتطبيقات، أمتلك <span class="highlight">فهمًا عميقًا لعلوم البرمجة</span> وأساليب تطوير الحلول التقنية. أعمل على تحويل الأفكار إلى تطبيقات عملية باستخدام أحدث التقنيات وأفضل الممارسات.
+                </p>
+                <p>
+                    تخصصي يشمل تطوير واجهات المستخدم التفاعلية وتجارب المستخدم المتميزة، مع التركيز على الأداء العالي والجودة الفائقة.
+                </p>
+                <a href="#projects" class="cta-button">استكشف أعمالي</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المهارات -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <h2 class="section-title">لغات البرمجة والتقنيات التي أتقنها</h2>
+            <div class="languages-grid">
+                <div class="language-card">
+                    <div class="language-icon"><i class="fab fa-html5"></i></div>
+                    <h3 class="language-name">HTML5</h3>
+                    <p>بنية وتصميم الويب</p>
+                </div>
+                <div class="language-card">
+                    <div class="language-icon"><i class="fab fa-css3-alt"></i></div>
+                    <h3 class="language-name">CSS3</h3>
+                    <p>تصميم وتنسيق المواقع</p>
+                </div>
+                <div class="language-card">
+                    <div class="language-icon"><i class="fab fa-js"></i></div>
+                    <h3 class="language-name">JavaScript</h3>
+                    <p>البرمجة التفاعلية</p>
+                </div>
+                <div class="language-card">
+                    <div class="language-icon"><i class="fab fa-react"></i></div>
+                    <h3 class="language-name">React</h3>
+                    <p>تطبيقات الويب الحديثة</p>
+                </div>
+                <div class="language-card">
+                    <div class="language-icon"><i class="fab fa-node-js"></i></div>
+                    <h3 class="language-name">Node.js</h3>
+                    <p>تطوير خلفية التطبيقات</p>
+                </div>
+                <div class="language-card">
+                    <div class="language-icon"><i class="fab fa-python"></i></div>
+                    <h3 class="language-name">Python</h3>
+                    <p>البرمجة متعددة الأغراض</p>
+                </div>
+                <div class="language-card">
+                    <div class="language-icon"><i class="fas fa-database"></i></div>
+                    <h3 class="language-name">SQL</h3>
+                    <p>قواعد البيانات</p>
+                </div>
+                <div class="language-card">
+                    <div class="language-icon"><i class="fab fa-git-alt"></i></div>
+                    <h3 class="language-name">Git</h3>
+                    <p>إدارة الإصدارات</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المشاريع - مع صور المشاريع -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <h2 class="section-title">أحدث أعمالي</h2>
+            <div class="projects-grid">
+                <!-- المشروع الأول: QuickVideoAI -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <!-- تم تغيير رابط الصورة هنا فقط -->
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" 
+                             alt="QuickVideoAI Screenshot" class="project-screenshot">
+                        <div class="project-name-overlay">QuickVideoAI</div>
+                        <div class="project-overlay">
+                            <a href="https://jassertbk.github.io/QuickVideoAI/" class="cta-button" target="_blank">عرض المشروع</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">QuickVideoAI</h3>
+                        <p class="project-description">
+                            منصة متقدمة لتحرير الفيديو باستخدام الذكاء الاصطناعي، تقدم حلولاً مبتكرة لإنشاء وتعديل المحتوى المرئي بسرعة وجودة عالية. المشروع يتضمن تقنيات معالجة فيديو متقدمة وخوارزميات ذكاء اصطناعي لتحسين تجربة المستخدم.
+                        </p>
+                        <a href="https://jassertbk.github.io/QuickVideoAI/" class="project-link" target="_blank">
+                            زيارة الموقع
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- المشروع الثاني: أكاديمية بايثون -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                             alt="أكاديمية بايثون Screenshot" class="project-screenshot">
+                        <div class="project-name-overlay">أكاديمية بايثون</div>
+                        <div class="project-overlay">
+                            <a href="https://jassertbk.github.io/-/" class="cta-button" target="_blank">عرض المشروع</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">أكاديمية بايثون</h3>
+                        <p class="project-description">
+                            منصة تعليمية متكاملة لتعليم لغة البرمجة بايثون من الصفر إلى الاحتراف. تقدم الأكاديمية مسارات تعليمية منظمة، تمارين تفاعلية، مشاريع عملية، ودروس فيديو عالية الجودة. تم تصميم المنصة لمساعدة المبتدئين والمبرمجين المحترفين على حد سواء.
+                        </p>
+                        <a href="https://jassertbk.github.io/-/" class="project-link" target="_blank">
+                            زيارة الموقع
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المستقبل -->
+    <section class="future" id="future">
+        <div class="container">
+            <div class="future-content">
+                <h2>المزيد من الأعمال قادمة</h2>
+                <p>
+                    هذه ليست سوى بداية رحلتي البرمجية. أعمل حاليًا على تطوير عدة مشاريع جديدة ومبتكرة تشمل تطبيقات ويب متقدمة، منصات تعلم إلكتروني، وحلول ذكاء اصطناعي متخصصة.
+                </p>
+                <p>
+                    أتابع باستمرار آخر التطورات في عالم البرمجة لأضمن تقديم حلول حديثة وفعّالة تلبي احتياجات العصر الرقمي.
+                </p>
+                <a href="#contact" class="cta-button">تواصل معي</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <div class="logo-img">
+                            <img src="https://i.postimg.cc/tRdTSSQd/HEIF-Image.jpg" alt="Logo">
+                        </div>
+                        <div class="logo-text">معرض الأعمال</div>
+                    </div>
+                    <p class="footer-text">
+                        مبرمجة ومطورة مواقع وتطبيقات، متخصصة في إنشاء حلول برمجية مبتكرة مع فهم عميق لعلوم البرمجة وتقنيات التطوير الحديثة.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 معرض الأعمال. جميع الحقوق محفوظة.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // تأثيرات تفاعلية للبطاقات
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.language-card, .project-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const angleY = (x - centerX) / 20;
+                    const angleX = (centerY - y) / 20;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
